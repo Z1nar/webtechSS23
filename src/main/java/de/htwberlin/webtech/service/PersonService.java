@@ -25,7 +25,7 @@ public class PersonService {
     }
 
     public Person create(PersonManipulationRequest request){
-        var personEntity = new PersonEntity(request.getFirstName(), request.getLastName(), request.isVaccinated());
+        var personEntity = new PersonEntity(request.getFirstName(), request.getLastName(), request.getDate(), request.getTime());
         personEntity = personRespository.save(personEntity);
         return transformEntity(personEntity);
     }
@@ -40,7 +40,8 @@ public class PersonService {
         var personEntity = personEntityOptional.get();
         personEntity.setFirstName(request.getFirstName());
         personEntity.setLastName(request.getLastName());
-        personEntity.setVaccinated(request.isVaccinated());
+        personEntity.setDate(request.getDate());
+        personEntity.setTime(request.getTime());
         personEntity = personRespository.save(personEntity);
 
         return transformEntity(personEntity);
@@ -66,7 +67,25 @@ public class PersonService {
                 personEntity.getId(),
                 personEntity.getFirstName(),
                 personEntity.getLastName(),
-                personEntity.isVaccinated()
+                personEntity.getDate(),
+                personEntity.getTime()
         );
     }
+
+    public boolean deleteByFirstAndLastName(String firstName, String lastName) {
+        var personEntityOptional = personRespository.findAllByFirstName(firstName)
+                .stream()
+                .filter(person -> person.getLastName().equals(lastName))
+                .findFirst();
+
+        if (personEntityOptional.isEmpty()) {
+            return false;
+        }
+
+        var personEntity = personEntityOptional.get();
+        personRespository.delete(personEntity);
+        return true;
+    }
+
+
 }

@@ -2,6 +2,9 @@ package de.htwberlin.webtech.persistence;
 
 import jakarta.persistence.*;
 
+import javax.xml.crypto.Data;
+import java.util.Date;
+
 @Entity(name = "persons")
 public class PersonEntity {
 
@@ -16,13 +19,17 @@ public class PersonEntity {
     @Column(name = "last name")
     private String lastName;
 
-    @Column(name = "is vaccinated")
-    private boolean vaccinated;
+    @Column(name = "date")
+    private String date;
 
-    public PersonEntity(String firstName, String lastName, boolean vaccinated) {
+    @Column(name = "time")
+    private String time;
+
+    public PersonEntity(String firstName, String lastName, String date, String time) {
         this.firstName = firstName;
         this.lastName = lastName;
-        this.vaccinated = vaccinated;
+        this.date = date;
+        this.time = time;
     }
 
     protected PersonEntity() {
@@ -49,12 +56,20 @@ public class PersonEntity {
         this.lastName = lastName;
     }
 
-    public boolean isVaccinated() {
-        return vaccinated;
+    public String getDate() {
+        return date;
     }
 
-    public void setVaccinated(boolean vaccinated) {
-        this.vaccinated = vaccinated;
+    public void setDate(String date) {
+        this.date = date;
+    }
+
+    public String getTime() {
+        return time;
+    }
+
+    public void setTime(String time) {
+        this.time = time;
     }
 }
 

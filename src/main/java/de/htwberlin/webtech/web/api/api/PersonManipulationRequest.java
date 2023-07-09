@@ -1,17 +1,23 @@
 package de.htwberlin.webtech.web.api.api;
 
+import java.util.Date;
+
 public class PersonManipulationRequest {
 
     private String firstName;
     private String lastName;
-    private boolean vaccinated;
+    private String date;
 
-    public PersonManipulationRequest(String firstName, String lastName, boolean vaccinated) {
+    private String time;
+
+    public PersonManipulationRequest(String firstName, String lastName, String date, String time) {
         this.firstName = firstName;
         this.lastName = lastName;
-        this.vaccinated = vaccinated;
+        this.date = date;
+        this.time = time;
     }
 
+    public PersonManipulationRequest() {}
 
     public String getFirstName() {
         return firstName;
@@ -29,11 +35,19 @@ public class PersonManipulationRequest {
         this.lastName = lastName;
     }
 
-    public boolean isVaccinated() {
-        return vaccinated;
+    public String getDate() {
+        return date;
     }
 
-    public void setVaccinated(boolean vaccinated) {
-        this.vaccinated = vaccinated;
+    public void setDate(String date) {
+        this.date = date;
+    }
+
+    public String getTime() {
+        return time;
+    }
+
+    public void setTime(String time) {
+        this.time = time;
     }
 }

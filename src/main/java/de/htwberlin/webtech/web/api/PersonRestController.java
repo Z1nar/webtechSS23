@@ -18,7 +18,7 @@ public class PersonRestController {
 
     public PersonRestController(PersonService personService) {
         this.personService = personService;
-        personService.add(new Person(1, "Max", "Mustermann", false));
+        //personService.add(new Person(1, "Max", "Mustermann", false));
     }
 
 
@@ -52,5 +52,12 @@ public class PersonRestController {
         boolean successful = personService.deleteById(id);
         return successful? ResponseEntity.ok().build() : ResponseEntity.notFound().build();
     }
+
+    @DeleteMapping(path = "/api/v1/persons/deleteByFirstAndLastName")
+    public ResponseEntity<Void> deletePersonByFirstAndLastName(@RequestParam String firstName, @RequestParam String lastName) {
+        boolean successful = personService.deleteByFirstAndLastName(firstName, lastName);
+        return successful ? ResponseEntity.ok().build() : ResponseEntity.notFound().build();
+    }
+
 
 }
